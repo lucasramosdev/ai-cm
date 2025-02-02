@@ -30,4 +30,4 @@ for t in range(epochs):
     test_loop(model, test_dataloader)
 
 torch.save(model.state_dict(),
-           fr'.\player_position_model.pth')
+           fr'.\player_position.mdl')
