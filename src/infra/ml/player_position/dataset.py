@@ -43,13 +43,9 @@ class GenDataset():
         features = df.drop(
             columns=["ability", "labels", "position"]).copy(True).to_numpy()
         scaler = preprocessing.StandardScaler().fit(features)
-        with open('scaler.scl', 'wb') as file:
-            # Serialize and write the variable to the file
+        with open('player_position.scl', 'wb') as file:
             pickle.dump(scaler, file)
         features = scaler.transform(features)
-        # df[["rating", "position"]] = df["scout rating"].str.extract(
-        #     r"([\d,]+)\s*%\s*\((.*?)\)")
-        # df["rating"] = df["rating"].str.replace(",", ".").astype(float)
         df["labels"] = df["labels"].apply(
             lambda x: labels_to_input[x])
         labels = df[["labels"]].to_numpy().squeeze()
