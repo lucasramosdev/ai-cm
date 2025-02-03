@@ -17,7 +17,7 @@ train_dataloader = DataLoader(training_data, batch_size=128)
 test_dataloader = DataLoader(test_data, batch_size=128)
 
 
-model = PlayerPosition(input_size=31).to(device)
+model = PlayerPosition(input_size=31, output_size=8).to(device)
 learning_rate = 3e-4
 optimizer = torch.optim.AdamW(
     model.parameters(), lr=learning_rate)
