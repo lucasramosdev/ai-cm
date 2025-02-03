@@ -10,14 +10,13 @@ labels_to_input = {
     "NA": 0,
     "GK": 1,
     "D": 2,
-    "SW": 3,
-    "DM": 4,
-    "M": 5,
-    "AM": 6,
-    "F": 7,
+    "DM": 3,
+    "M": 4,
+    "AM": 5,
+    "F": 6,
 }
 
-labels_to_output = ["NA", "GK", "D", "SW", "DM", "M", "AM", "F", "S"]
+labels_to_output = ["NA", "GK", "D", "DM", "M", "AM", "F", ]
 
 
 class GenDataset():
@@ -41,6 +40,8 @@ class GenDataset():
             lambda row: row["labels"] if row["ability"] > 70 else "NA", axis=1)
         df["labels"] = df["labels"].apply(
             lambda x: "F" if x == "S" else x)
+        df["labels"] = df["labels"].apply(
+            lambda x: "DM" if x == "SW" else x)
         features = df.drop(
             columns=["ability", "labels", "position"]).copy(True).to_numpy()
         scaler = preprocessing.StandardScaler().fit(features)
